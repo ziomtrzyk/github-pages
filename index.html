@@ -6,73 +6,84 @@
     <title>Kalkulator</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #f0f0f0;
+            background: linear-gradient(180deg, #ffe6f0, #f3e5f5);
             margin: 0;
-            padding: 20px;
+            padding: 40px;
+        }
+        h1 {
+            color: #c71585;
+            font-size: 48px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
         .calculator {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 300px;
+            background: linear-gradient(135deg, #fff0f5, #f8e1eb);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            width: 600px;
             text-align: center;
+            border: 2px solid #ffb6c1;
         }
         input[type="text"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            font-size: 18px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            font-size: 36px;
+            border: 2px solid #ffb6c1;
+            border-radius: 10px;
             box-sizing: border-box;
+            background-color: #fff;
+            color: #c71585;
+            height: 100px;
+            line-height: 1.2;
+            resize: none;
+            overflow: hidden;
         }
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 5px;
+            gap: 10px;
         }
         button {
-            padding: 15px;
-            font-size: 18px;
+            padding: 30px;
+            font-size: 36px;
             border: none;
-            border-radius: 5px;
-            background-color: #e0e0e0;
+            border-radius: 20px;
+            background-color: #ffb6c1;
+            color: white;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, transform 0.1s;
         }
         button:hover {
-            background-color: #d0d0d0;
+            background-color: #ff69b4;
+            transform: scale(1.05);
         }
         .operator {
-            background-color: #ff9500;
-            color: white;
+            background-color: #da70d6;
         }
         .operator:hover {
-            background-color: #e68a00;
+            background-color: #c71585;
         }
         .equals {
-            background-color: #2196F3;
-            color: white;
+            background-color: #ff1493;
         }
         .equals:hover {
-            background-color: #1976D2;
+            background-color: #c71585;
         }
         .clear {
-            background-color: #f44336;
-            color: white;
+            background-color: #ff4040;
         }
         .clear:hover {
-            background-color: #d32f2f;
+            background-color: #cc3333;
         }
     </style>
 </head>
 <body>
-    <h1>Prosty Kalkulator</h1>
+    <h1>Asiulkowy Kalkulator</h1>
     <div class="calculator">
         <input type="text" id="display" readonly>
         <div class="buttons">
@@ -100,22 +111,78 @@
 
     <script>
         let display = document.getElementById('display');
+        const messages = [
+
+'Wybacz mi proszę, nie było moją intencją by Cię zranic.',
+
+'Bardzo mi przykro Asiulko, że zawiodłem Twoje zaufanie.',
+
+'Przepraszam, że Cię zasmuciłem.',
+
+'Wiem, że zawiniłem i szczerze żałuję, przepraszam Cię Asiulko.',
+
+'Jest mi wstyd, że Cię zawiodłem.',
+
+'Proszę Cię Asiulo o wybaczenie',
+
+'Przepraszam, że nadużyłem twoją naiwność',
+
+'Asiulko, bardzo żałuję..',
+
+'Nie sądziłem, że taki rozwój spraw może zranić twoje uczucia',
+
+'Wiem, że nie jestem idealny(choc blisko jest do tego), ale staram się.',
+
+'Przepraszam i bardzo doceniam, że Cię poznałem.',
+
+'Asiulko, przepraszam jestem tylko uposiem',
+
+'Wybacz mi moje błędy, ciągle się uczę oglądając sex education',
+
+'Przepraszam Asiulko i mam nadzieję, że dasz mi szansę to naprawić.'
+        ];
 
         function appendToDisplay(value) {
             display.value += value;
+            adjustFontSize();
         }
 
         function clearDisplay() {
             display.value = '';
+            display.style.fontSize = '36px';
         }
 
         function calculate() {
-            try {
-                display.value = eval(display.value);
-            } catch (error) {
-                display.value = 'Błąd';
-                setTimeout(clearDisplay, 1000);
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            display.value = randomMessage;
+            adjustFontSize();
+        }
+
+        function adjustFontSize() {
+            let fontSize = 36;
+            display.style.fontSize = fontSize + 'px';
+
+           
+            const temp = document.createElement('span');
+            temp.style.visibility = 'hidden';
+            temp.style.position = 'absolute';
+            temp.style.whiteSpace = 'nowrap';
+            temp.style.fontSize = fontSize + 'px';
+            temp.style.fontFamily = getComputedStyle(display).fontFamily;
+            temp.innerText = display.value;
+            document.body.appendChild(temp);
+
+            
+            const maxWidth = display.clientWidth - 40; 
+
+            
+            while (temp.offsetWidth > maxWidth && fontSize > 12) {
+                fontSize -= 2;
+                temp.style.fontSize = fontSize + 'px';
             }
+
+            display.style.fontSize = fontSize + 'px';
+            document.body.removeChild(temp); 
         }
     </script>
 </body>
