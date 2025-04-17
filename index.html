@@ -39,11 +39,11 @@
             box-sizing: border-box;
             background-color: #fff;
             color: #c71585;
-            height: 60px; /* Zmniejszona wysokość, bo bez zawijania */
+            height: 60px;
             line-height: 1.2;
             resize: none;
             overflow: hidden;
-            white-space: nowrap; /* Bez zawijania tekstu */
+            white-space: nowrap;
         }
         .buttons {
             display: grid;
@@ -115,54 +115,54 @@
         /* Styl dla telefonów (ekrany ≤ 768px) */
         @media (max-width: 768px) {
             body {
-                background: #fff0f5; /* Jaśniejsze tło */
-                padding: 5vw;
+                background: #fff0f5;
+                padding: 4vw;
             }
             h1 {
-                font-size: 8vw;
-                margin-bottom: 3vw;
+                font-size: 7vw;
+                margin-bottom: 2vw;
             }
             .calculator {
-                width: 90vw;
-                padding: 5vw;
-                border-radius: 3vw;
-                border: 0.5vw solid #ffb6c1;
-                box-shadow: 0 0 3vw rgba(0, 0, 0, 0.1);
+                width: 80vw; /* Mniejsza szerokość */
+                padding: 4vw;
+                border-radius: 2vw;
+                border: 0.4vw solid #ffb6c1;
+                box-shadow: 0 0 2vw rgba(0, 0, 0, 0.1);
                 background: #fff;
             }
             input[type="text"] {
-                font-size: 6vw;
-                height: 12vw; /* Mniejsza wysokość */
-                padding: 3vw;
-                border-radius: 2vw;
-                border: 0.5vw solid #ffb6c1;
+                font-size: 5vw; /* Mniejsza czcionka */
+                height: 10vw; /* Mniejsza wysokość */
+                padding: 2vw;
+                border-radius: 1.5vw;
+                border: 0.4vw solid #ffb6c1;
             }
             .buttons {
-                gap: 2vw;
+                gap: 1.5vw;
             }
             button {
-                padding: 4vw;
-                font-size: 5vw;
-                border-radius: 3vw;
+                padding: 3vw; /* Mniejsze przyciski */
+                font-size: 4vw; /* Mniejsza czcionka */
+                border-radius: 2vw;
             }
         }
 
         /* Dodatkowe dostosowanie dla bardzo małych ekranów */
         @media (max-width: 500px) {
             h1 {
-                font-size: 10vw;
+                font-size: 8vw;
             }
             .calculator {
-                width: 95vw;
-                padding: 6vw;
+                width: 85vw;
+                padding: 5vw;
             }
             input[type="text"] {
-                font-size: 7vw;
-                height: 15vw;
+                font-size: 6vw;
+                height: 12vw;
             }
             button {
-                padding: 5vw;
-                font-size: 6vw;
+                padding: 4vw;
+                font-size: 5vw;
             }
         }
     </style>
@@ -220,7 +220,7 @@
 
         function clearDisplay() {
             display.value = '';
-            display.style.fontSize = window.innerWidth <= 768 ? '6vw' : '36px';
+            display.style.fontSize = window.innerWidth <= 768 ? '5vw' : '36px';
         }
 
         function calculate() {
@@ -230,19 +230,19 @@
         }
 
         function adjustFontSize() {
-            let fontSize = window.innerWidth <= 768 ? 6 : 36; // 6vw na telefonach, 36px na komputerach
+            let fontSize = window.innerWidth <= 768 ? 5 : 36; // 5vw na telefonach, 36px na komputerach
             display.style.fontSize = window.innerWidth <= 768 ? fontSize + 'vw' : fontSize + 'px';
 
             const temp = document.createElement('span');
             temp.style.visibility = 'hidden';
             temp.style.position = 'absolute';
-            temp.style.whiteSpace = 'nowrap'; // Bez zawijania
+            temp.style.whiteSpace = 'nowrap';
             temp.style.fontSize = display.style.fontSize;
             temp.style.fontFamily = getComputedStyle(display).fontFamily;
             temp.innerText = display.value;
             document.body.appendChild(temp);
 
-            const maxWidth = display.clientWidth - (window.innerWidth <= 768 ? 6 : 40);
+            const maxWidth = display.clientWidth - (window.innerWidth <= 768 ? 4 : 40);
 
             while (temp.offsetWidth > maxWidth && fontSize > (window.innerWidth <= 768 ? 1.5 : 6)) {
                 fontSize -= window.innerWidth <= 768 ? 0.2 : 1;
