@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator</title>
+    <title>Asiulkowy Kalkulator</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: linear-gradient(180deg, #ffe6f0, #f3e5f5);
             margin: 0;
             padding: 40px;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
         h1 {
             color: #c71585;
-            font-size: 48px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
         .calculator {
@@ -27,6 +27,7 @@
             width: 600px;
             text-align: center;
             border: 2px solid #ffb6c1;
+            box-sizing: border-box;
         }
         input[type="text"] {
             width: 100%;
@@ -38,10 +39,11 @@
             box-sizing: border-box;
             background-color: #fff;
             color: #c71585;
-            height: 100px;
+            height: 60px; /* Zmniejszona wysokość, bo bez zawijania */
             line-height: 1.2;
             resize: none;
             overflow: hidden;
+            white-space: nowrap; /* Bez zawijania tekstu */
         }
         .buttons {
             display: grid;
@@ -80,6 +82,89 @@
         .clear:hover {
             background-color: #cc3333;
         }
+
+        /* Styl dla komputerów (ekrany > 768px) */
+        @media (min-width: 769px) {
+            body {
+                background: linear-gradient(180deg, #ffe6f0, #f3e5f5);
+                padding: 40px;
+            }
+            h1 {
+                font-size: 48px;
+            }
+            .calculator {
+                padding: 40px;
+                border-radius: 20px;
+                width: 600px;
+                border: 2px solid #ffb6c1;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            }
+            input[type="text"] {
+                font-size: 36px;
+                height: 60px;
+                border-radius: 10px;
+                padding: 20px;
+            }
+            button {
+                padding: 30px;
+                font-size: 36px;
+                border-radius: 20px;
+            }
+        }
+
+        /* Styl dla telefonów (ekrany ≤ 768px) */
+        @media (max-width: 768px) {
+            body {
+                background: #fff0f5; /* Jaśniejsze tło */
+                padding: 5vw;
+            }
+            h1 {
+                font-size: 8vw;
+                margin-bottom: 3vw;
+            }
+            .calculator {
+                width: 90vw;
+                padding: 5vw;
+                border-radius: 3vw;
+                border: 0.5vw solid #ffb6c1;
+                box-shadow: 0 0 3vw rgba(0, 0, 0, 0.1);
+                background: #fff;
+            }
+            input[type="text"] {
+                font-size: 6vw;
+                height: 12vw; /* Mniejsza wysokość */
+                padding: 3vw;
+                border-radius: 2vw;
+                border: 0.5vw solid #ffb6c1;
+            }
+            .buttons {
+                gap: 2vw;
+            }
+            button {
+                padding: 4vw;
+                font-size: 5vw;
+                border-radius: 3vw;
+            }
+        }
+
+        /* Dodatkowe dostosowanie dla bardzo małych ekranów */
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 10vw;
+            }
+            .calculator {
+                width: 95vw;
+                padding: 6vw;
+            }
+            input[type="text"] {
+                font-size: 7vw;
+                height: 15vw;
+            }
+            button {
+                padding: 5vw;
+                font-size: 6vw;
+            }
+        }
     </style>
 </head>
 <body>
@@ -112,34 +197,20 @@
     <script>
         let display = document.getElementById('display');
         const messages = [
-
-'Wybacz mi proszę, nie było moją intencją by Cię zranic.',
-
-'Bardzo mi przykro Asiulko, że zawiodłem Twoje zaufanie.',
-
-'Przepraszam, że Cię zasmuciłem.',
-
-'Wiem, że zawiniłem i szczerze żałuję, przepraszam Cię Asiulko.',
-
-'Jest mi wstyd, że Cię zawiodłem.',
-
-'Proszę Cię Asiulo o wybaczenie',
-
-'Przepraszam, że nadużyłem twoją naiwność',
-
-'Asiulko, bardzo żałuję..',
-
-'Nie sądziłem, że taki rozwój spraw może zranić twoje uczucia',
-
-'Wiem, że nie jestem idealny(choc blisko jest do tego), ale staram się.',
-
-'Przepraszam i bardzo doceniam, że Cię poznałem.',
-
-'Asiulko, przepraszam jestem tylko uposiem',
-
-'Wybacz mi moje błędy, ciągle się uczę oglądając sex education',
-
-'Przepraszam Asiulko i mam nadzieję, że dasz mi szansę to naprawić.'
+            'Wybacz mi proszę, nie było moją intencją by Cię zranić.',
+            'Bardzo mi przykro Asiulko, że zawiodłem Twoje zaufanie.',
+            'Przepraszam, że Cię zasmuciłem.',
+            'Wiem, że zawiniłem i szczerze żałuję, przepraszam Cię Asiulko.',
+            'Jest mi wstyd, że Cię zawiodłem.',
+            'Proszę Cię Asiulo o wybaczenie',
+            'Przepraszam, że nadużyłem twoją naiwność',
+            'Asiulko, bardzo żałuję..',
+            'Nie sądziłem, że taki rozwój spraw może zranić twoje uczucia',
+            'Wiem, że nie jestem idealny(choc blisko jest do tego), ale staram się.',
+            'Przepraszam i bardzo doceniam, że Cię poznałem.',
+            'Asiulko, przepraszam jestem tylko uposiem',
+            'Wybacz mi moje błędy, ciągle się uczę oglądając sex education',
+            'Przepraszam Asiulko i mam nadzieję, że dasz mi szansę to naprawić.'
         ];
 
         function appendToDisplay(value) {
@@ -149,7 +220,7 @@
 
         function clearDisplay() {
             display.value = '';
-            display.style.fontSize = '36px';
+            display.style.fontSize = window.innerWidth <= 768 ? '6vw' : '36px';
         }
 
         function calculate() {
@@ -159,31 +230,30 @@
         }
 
         function adjustFontSize() {
-            let fontSize = 36;
-            display.style.fontSize = fontSize + 'px';
+            let fontSize = window.innerWidth <= 768 ? 6 : 36; // 6vw na telefonach, 36px na komputerach
+            display.style.fontSize = window.innerWidth <= 768 ? fontSize + 'vw' : fontSize + 'px';
 
-           
             const temp = document.createElement('span');
             temp.style.visibility = 'hidden';
             temp.style.position = 'absolute';
-            temp.style.whiteSpace = 'nowrap';
-            temp.style.fontSize = fontSize + 'px';
+            temp.style.whiteSpace = 'nowrap'; // Bez zawijania
+            temp.style.fontSize = display.style.fontSize;
             temp.style.fontFamily = getComputedStyle(display).fontFamily;
             temp.innerText = display.value;
             document.body.appendChild(temp);
 
-            
-            const maxWidth = display.clientWidth - 40; 
+            const maxWidth = display.clientWidth - (window.innerWidth <= 768 ? 6 : 40);
 
-            
-            while (temp.offsetWidth > maxWidth && fontSize > 12) {
-                fontSize -= 2;
-                temp.style.fontSize = fontSize + 'px';
+            while (temp.offsetWidth > maxWidth && fontSize > (window.innerWidth <= 768 ? 1.5 : 6)) {
+                fontSize -= window.innerWidth <= 768 ? 0.2 : 1;
+                temp.style.fontSize = window.innerWidth <= 768 ? fontSize + 'vw' : fontSize + 'px';
             }
 
-            display.style.fontSize = fontSize + 'px';
-            document.body.removeChild(temp); 
+            display.style.fontSize = window.innerWidth <= 768 ? fontSize + 'vw' : fontSize + 'px';
+            document.body.removeChild(temp);
         }
+
+        window.addEventListener('resize', adjustFontSize);
     </script>
 </body>
 </html>
